@@ -228,3 +228,28 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
 // New window just needs this ran so it can set the current working directory.
 nwSplasherAutoUpdate.setCurrentWorkingDirectory();
 ```
+
+
+## Who is this for?
+
+This approach isn't for everyone. If you're dependencies are tied to a specific Chromium, Node, or NW.js version, and you also need to ship the latest NW.js with your code, this approach won't work for you. Some may want to develop on the latest NW.js, and produce new releases that ship with it. However, prior releases would have older NW.js copies downloaded, which may no longer be compatible with code developed in newer versions, so the auto-updating would pull down code that wouldn't run until the user downloaded the latest full release anyway.
+
+
+### Suggestions
+
+If you can freeze the version of NW.js you use to a specific version and stay on that version for a year or more, this would limit the amount of manual testing you would need to do on different versions of NW.js. Using tools like Babel and Autoprefixer to target a specific Chromium version can help too. Though you'd need to ensure your node dependencies stay in sync with that version as well.
+
+Some may want to encode the NW.js version in their `versionUrl`, such as:
+
+```js
+versionUrl: 'https://api.example.com/versions?nw=' + process.versions.nw
+```
+
+If they release different auto-update packages for different NW.js versions.
+
+We suggest ALL users of this library code in some UI to convey to users when an auto-update won't work, and they'll need to download the full version from the website again. So if a user is on a 3 year old version of NW.js that you want to drop support for, there is some way of conveying that cleanly in the UI that is compatible with the older version.
+
+
+### For-profit software
+
+If you are using NW.js to create for-profit software, then this style of auto-update may not work for you. If you require authenticating a license, key, or the user, or the download requires authentication, then this "splash + download a zip" approach is likely too simple for your needs, and you should consider writing your own solution custom to your use case.
