@@ -55,7 +55,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
       if (updateAvailable) {
         return latestRemote;
       }
-      retrun false;
+      return false;
     },
     /**
      * Called after hitting the versionUrl with the response.
