@@ -1,0 +1,28 @@
+{
+  "name": "nw-splasher-auto-update",
+  "version": "1.0.0",
+  "description": "Tool to automate checking for updates and downloading newer versions for NW.js apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "dependencies": {
+    "nw-splasher": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwutils/nw-splasher-auto-update.git"
+  },
+  "keywords": [
+    "NW.js",
+    "auto-updates",
+    "splash",
+    "screen"
+  ],
+  "author": "TheJaredWilcurt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nwutils/nw-splasher-auto-update/issues"
+  },
+  "homepage": "https://github.com/nwutils/nw-splasher-auto-update#readme"
+}
