@@ -4,10 +4,10 @@ WIP: A tool to automate checking for updates and downloading newer versions.
 
 This is an idea I've had for a long time, but never had a reason to implement. So we'd need a proof of concept to verify it can work. I'd also like feedback from others in the community on the API.
 
-The idea is your user downloads a your app, but it only contains NW.js and a splash screen file that runs the code seen below. This code then downloads a zip file containing your `package.nw` folder contents, including any `node_modules` to a folder in appData. Then a new window is launched pointing to a file in the extracted appData folder, and setting that folder as the current working directory. I'm assuming that would work, but have not tested yet.
+The idea is your user downloads your app, but it only contains NW.js and a splash screen file that runs the code seen below. This code then downloads a zip file containing your `package.nw` folder contents, including any `node_modules` to a folder in appData. Then a new window is launched pointing to a file in the extracted appData folder, and setting that folder as the current working directory. I'm assuming that would work, but have not tested yet.
 
 
-## Main API (mockup, not ready for use)
+## Main API
 
 In the `splash.html` file
 
