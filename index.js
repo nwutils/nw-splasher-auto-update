@@ -1,14 +1,15 @@
+'use strict';
+
 /**
  * @file    Entry point for the library. Exposes the external facing function that accepts the input defined in the API documentation.
  * @author  TheJaredWilcurt
  */
-'use strict';
 
 const validation = require('./src/validation.js');
 
 const nwSplasherAutoUpdate = {
   downloadLatestAppAndOpenWindowInBackground: function (options) {
-    options = validation.validateOptions(options);
+    options = validation.validateDownloadLatestAppAndOpenWindowInBackgroundOptions(options);
     options = {
       splasher: {
         /**
@@ -110,7 +111,7 @@ const nwSplasherAutoUpdate = {
          */
         onRetry: function (message) {
           console.log(message);
-        }
+        },
         /**
          * Called when an error is encountered that ended execution
          * prematurely. Such as failing to download or extract after

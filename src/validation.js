@@ -8,7 +8,7 @@
 const {
   DEFAULT_CLOSE_SPLASH_AFTER,
   DEFAULT_PORT_NUMBER
-} = require('./constants.js')
+} = require('./constants.js');
 const helpers = require('./helpers.js');
 
 const validation = {

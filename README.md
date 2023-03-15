@@ -132,7 +132,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      */
     onRetry: function (message) {
       console.log(message);
-    }
+    },
     /**
      * Called when an error is encountered that ended execution
      * prematurely. Such as failing to download or extract after

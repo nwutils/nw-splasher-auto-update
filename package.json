@@ -4,10 +4,24 @@
   "description": "Tool to automate checking for updates and downloading newer versions for NW.js apps",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint --config=.eslintrc.js index.js src tests",
+    "fix": "eslint --fix --config=.eslintrc.js index.js src tests",
     "test": "vitest"
   },
   "dependencies": {
     "nw-splasher": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.21.3",
+    "eslint": "^8.36.0",
+    "eslint-config-tjw-base": "^2.0.0",
+    "eslint-config-tjw-import": "^1.0.0",
+    "eslint-config-tjw-jest": "^2.0.0",
+    "eslint-config-tjw-jsdoc": "^1.0.3",
+    "eslint-import-resolver-webpack": "^0.13.2",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-jsdoc": "^40.0.2"
   },
   "repository": {
     "type": "git",
