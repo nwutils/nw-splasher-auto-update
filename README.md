@@ -18,6 +18,20 @@ In the `splash.html` file
  * 3. Launches a window pointed to the latest version
  */
 nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
+  // OPTIONAL: defaults to true
+  verbose: true,
+  /**
+   * OPTIONAL: console.error is called by default if verbose: true.
+   *
+   * Your own custom logging function called with helpful warning/error
+   * messages from the internal validators. Only used if verbose: true.
+   *
+   * @param  {string} message The human readable warning/error message
+   * @param  {object} error   Sometimes an error or options object is passed
+   */
+  customLogger: function (message, error) {
+    console.log(message, error);
+  },
   splasher: {
     /**
      * The websocket port the splash screen window listens on. When your main app window
