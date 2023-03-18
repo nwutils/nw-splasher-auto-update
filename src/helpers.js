@@ -20,14 +20,19 @@ const helpers = {
    * @param {object} error    Optional object with additional details
    */
   throwError: function (options, message, error) {
+    const libraryString = '_________________________\nNW-Splasher-Auto-Update:\n';
     if (options.verbose && options.customLogger) {
       options.customLogger(message, error);
-    } else if (options.verbose) {
+    } else if (options.verbose && error) {
       console.error(
-        '_________________________\n' +
-        'NW-Splasher-Auto-Update:\n' +
+        libraryString,
         message,
         error
+      );
+    } else if (options.verbose) {
+      console.error(
+        libraryString,
+        message
       );
     }
   }
