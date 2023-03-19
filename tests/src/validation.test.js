@@ -81,7 +81,7 @@ describe('validation.js', () => {
       const defaultValue = 5;
       const key = 'KEY';
 
-      test('undefined', () => {
+      test('Undefined', () => {
         expect(validation.defaultNumber(options, undefined, defaultValue, key))
           .toEqual(5);
 
@@ -141,7 +141,7 @@ describe('validation.js', () => {
     describe('validateOptionalString', () => {
       const key = 'KEY';
 
-      test('undefined', () => {
+      test('Undefined', () => {
         expect(validation.validateOptionalString(options, undefined, key))
           .toEqual(undefined);
 
@@ -169,7 +169,7 @@ describe('validation.js', () => {
     describe('validateOptionalObject', () => {
       const key = 'KEY';
 
-      test('undefined', () => {
+      test('Undefined', () => {
         expect(validation.validateOptionalObject(options, undefined, key))
           .toEqual(undefined);
 
@@ -230,11 +230,36 @@ describe('validation.js', () => {
     });
 
     describe('validateOptionalFunction', () => {
+      const key = 'KEY';
+
+      test('Undefined', () => {
+        expect(validation.validateOptionalFunction(options, undefined, key))
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
+
+      test('String', () => {
+        expect(validation.validateOptionalFunction(options, 'asdf', key))
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .toHaveBeenCalledWith('The KEY must be a function or undefined');
+      });
+
+      test('Function', () => {
+        const value = vi.fn();
+
+        expect(validation.validateOptionalFunction(options, value, key))
+          .toEqual(value);
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
     });
 
-    /*
     describe('validateRequiredFunction', () => {
     });
-    */
   });
 });
