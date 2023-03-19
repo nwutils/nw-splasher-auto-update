@@ -20,10 +20,57 @@ describe('validation.js', () => {
     };
   });
 
-  /*
   describe('Specific', () => {
+    describe('validateDownloadLatestAppAndOpenWindowInBackgroundOptions', () => {
+      test('undefined', () => {
+        expect(validation.validateDownloadLatestAppAndOpenWindowInBackgroundOptions())
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
+    });
+
+    describe('validateSplasherOptions', () => {
+      test('undefined', () => {
+        expect(validation.validateSplasherOptions())
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
+    });
+
+    describe('validateAutoUpdateOptions', () => {
+      test('undefined', () => {
+        expect(validation.validateAutoUpdateOptions())
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
+    });
+
+    describe('validateNewWindowOptions', () => {
+      test('undefined', () => {
+        expect(validation.validateNewWindowOptions())
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
+    });
+
+    describe('removeUndocumentedDownloadLatestAppAndOpenWindowInBackgroundKeys', () => {
+      test('undefined', () => {
+        expect(validation.removeUndocumentedDownloadLatestAppAndOpenWindowInBackgroundKeys())
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
+    });
   });
-  */
 
   describe('Generic', () => {
     describe('deleteKeys', () => {
