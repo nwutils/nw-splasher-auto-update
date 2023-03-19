@@ -21,8 +21,10 @@ const helpers = {
    */
   throwError: function (options, message, error) {
     const libraryString = '_________________________\nNW-Splasher-Auto-Update:\n';
-    if (options.verbose && options.customLogger) {
+    if (options.verbose && options.customLogger && error) {
       options.customLogger(message, error);
+    } else if (options.verbose && options.customLogger) {
+      options.customLogger(message);
     } else if (options.verbose && error) {
       console.error(
         libraryString,
