@@ -317,9 +317,7 @@ const validation = {
   validateRequiredFunction: function (options, value, key) {
     if (typeof(value) !== 'function') {
       helpers.throwError(options, 'The ' + key + ' is a required function');
-      return function () {
-        throw 'ERROR: Required function missing.';
-      };
+      return helpers.requiredFunctionMissing;
     }
     return value;
   }

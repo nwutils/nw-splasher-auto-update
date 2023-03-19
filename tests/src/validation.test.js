@@ -5,6 +5,7 @@
  * @author TheJaredWilcurt
  */
 
+const helpers = require('../../src/helpers.js');
 const validation = require('../../src/validation.js');
 
 describe('validation.js', () => {
@@ -260,6 +261,25 @@ describe('validation.js', () => {
     });
 
     describe('validateRequiredFunction', () => {
+      const key = 'KEY';
+
+      test('Undefined', () => {
+        expect(validation.validateRequiredFunction(options, undefined, key))
+          .toEqual(helpers.requiredFunctionMissing);
+
+        expect(customLogger)
+          .toHaveBeenCalledWith('The KEY is a required function');
+      });
+
+      test('Function', () => {
+        const value = vi.fn();
+
+        expect(validation.validateRequiredFunction(options, value, key))
+          .toEqual(value);
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
     });
   });
 });

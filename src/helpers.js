@@ -37,6 +37,12 @@ const helpers = {
         message
       );
     }
+  },
+  /**
+   * Dummy function used if a required function was not passed in.
+   */
+  requiredFunctionMissing: function () {
+    throw 'ERROR: Required function missing.';
   }
 };
 
