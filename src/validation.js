@@ -262,7 +262,7 @@ const validation = {
       return value;
     }
     if (typeof(value) !== 'object' || Array.isArray(value)) {
-      helpers.throwError(options, 'Optional ' + key + ' must be an object.');
+      helpers.throwError(options, 'Optional ' + key + ' must be an object');
       return undefined;
     }
     return value;

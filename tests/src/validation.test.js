@@ -18,6 +18,7 @@ describe('validation.js', () => {
       customLogger
     };
   });
+
   /*
   describe('Specific', () => {
   });
@@ -77,12 +78,11 @@ describe('validation.js', () => {
     });
 
     describe('defaultNumber', () => {
-      test('undefined', () => {
-        const value = undefined;
-        const defaultValue = 5;
-        const key = 'KEY';
+      const defaultValue = 5;
+      const key = 'KEY';
 
-        expect(validation.defaultNumber(options, value, defaultValue, key))
+      test('undefined', () => {
+        expect(validation.defaultNumber(options, undefined, defaultValue, key))
           .toEqual(5);
 
         expect(customLogger)
@@ -90,11 +90,7 @@ describe('validation.js', () => {
       });
 
       test('Number', () => {
-        const value = 3;
-        const defaultValue = 5;
-        const key = 'KEY';
-
-        expect(validation.defaultNumber(options, value, defaultValue, key))
+        expect(validation.defaultNumber(options, 3, defaultValue, key))
           .toEqual(3);
 
         expect(customLogger)
@@ -102,11 +98,7 @@ describe('validation.js', () => {
       });
 
       test('String', () => {
-        const value = 'asdf';
-        const defaultValue = 5;
-        const key = 'KEY';
-
-        expect(validation.defaultNumber(options, value, defaultValue, key))
+        expect(validation.defaultNumber(options, 'asdf', defaultValue, key))
           .toEqual(5);
 
         expect(customLogger)
@@ -114,11 +106,7 @@ describe('validation.js', () => {
       });
 
       test('NaN', () => {
-        const value = NaN;
-        const defaultValue = 5;
-        const key = 'KEY';
-
-        expect(validation.defaultNumber(options, value, defaultValue, key))
+        expect(validation.defaultNumber(options, NaN, defaultValue, key))
           .toEqual(5);
 
         expect(customLogger)
@@ -126,11 +114,7 @@ describe('validation.js', () => {
       });
 
       test('5.5', () => {
-        const value = 5.5;
-        const defaultValue = 5;
-        const key = 'KEY';
-
-        expect(validation.defaultNumber(options, value, defaultValue, key))
+        expect(validation.defaultNumber(options, 5.5, defaultValue, key))
           .toEqual(5);
 
         expect(customLogger)
@@ -138,11 +122,7 @@ describe('validation.js', () => {
       });
 
       test('Infinity', () => {
-        const value = Infinity;
-        const defaultValue = 5;
-        const key = 'KEY';
-
-        expect(validation.defaultNumber(options, value, defaultValue, key))
+        expect(validation.defaultNumber(options, Infinity, defaultValue, key))
           .toEqual(5);
 
         expect(customLogger)
@@ -150,11 +130,7 @@ describe('validation.js', () => {
       });
 
       test('-Infinity', () => {
-        const value = -Infinity;
-        const defaultValue = 5;
-        const key = 'KEY';
-
-        expect(validation.defaultNumber(options, value, defaultValue, key))
+        expect(validation.defaultNumber(options, -Infinity, defaultValue, key))
           .toEqual(5);
 
         expect(customLogger)
@@ -162,13 +138,71 @@ describe('validation.js', () => {
       });
     });
 
-    /*
     describe('validateOptionalString', () => {
+      const key = 'KEY';
+
+      test('undefined', () => {
+        expect(validation.validateOptionalString(options, undefined, key))
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
+
+      test('String', () => {
+        expect(validation.validateOptionalString(options, 'asdf', key))
+          .toEqual('asdf');
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
+
+      test('Number', () => {
+        expect(validation.validateOptionalString(options, 5, key))
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .toHaveBeenCalledWith('The optional KEY must be a string');
+      });
     });
 
     describe('validateOptionalObject', () => {
+      const key = 'KEY';
+
+      test('undefined', () => {
+        expect(validation.validateOptionalObject(options, undefined, key))
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
+
+      test('Object', () => {
+        expect(validation.validateOptionalObject(options, {}, key))
+          .toEqual({});
+
+        expect(customLogger)
+          .not.toHaveBeenCalled();
+      });
+
+      test('Array', () => {
+        expect(validation.validateOptionalObject(options, [], key))
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .toHaveBeenCalledWith('Optional KEY must be an object');
+      });
+
+      test('String', () => {
+        expect(validation.validateOptionalObject(options, 'asdf', key))
+          .toEqual(undefined);
+
+        expect(customLogger)
+          .toHaveBeenCalledWith('Optional KEY must be an object');
+      });
     });
 
+    /*
     describe('validateOptionalFunctions', () => {
     });
 
