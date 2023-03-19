@@ -18,6 +18,9 @@ module.exports = {
     node: true,
     jest: true
   },
+  globals: {
+    vi: true
+  },
   extends: [
     'tjw-base',
     'tjw-import',

@@ -202,13 +202,37 @@ describe('validation.js', () => {
       });
     });
 
-    /*
     describe('validateOptionalFunctions', () => {
+      test('String', () => {
+        const a = vi.fn();
+        options = {
+          ...options,
+          section: {
+            a,
+            b: 'asdf'
+          }
+        };
+        const apiSection = 'section';
+        const functions = ['a', 'b'];
+
+        expect(validation.validateOptionalFunctions(options, apiSection, functions))
+          .toEqual({
+            verbose: true,
+            customLogger,
+            section: {
+              a
+            }
+          });
+
+        expect(customLogger)
+          .toHaveBeenCalledWith('The section.b must be a function or undefined');
+      });
     });
 
     describe('validateOptionalFunction', () => {
     });
 
+    /*
     describe('validateRequiredFunction', () => {
     });
     */
