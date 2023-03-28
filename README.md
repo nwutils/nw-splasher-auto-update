@@ -48,8 +48,8 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
   autoUpdate: {
     /**
      * NW.js Splasher Auto Update will make a network request to the versionUrl,
-     * then pass the response into this callback function for you to use to provide
-     * the URL to download the latest version.
+     * then pass the response into the confirmNewVersion and downloadPath
+     * callback functions you provide.
      */
     versionUrl: 'https://example.com/versions.json',
     /**
@@ -184,21 +184,21 @@ Deleting old cache
  * This will delete all old zip files and extracted files except for the latest version.
  */
 nwSplasherAutoUpdate.deletePastVersions({
-    /**
-     * Called when any errors are encountered during deletion.
-     *
-     * @param {string} errorMessage  Human readable error message
-     * @param {object} err           Detailed error information if available
-     */
-    onError: function (errorMessage, err) {
-      console.log(errorMessage, err);
-    },
-    /**
-     * When deletion attempt finishes, whether successful or not.
-     */
-    onComplete: function () {
-      console.log('Finished');
-    }
+  /**
+   * Called when any errors are encountered during deletion.
+   *
+   * @param {string} errorMessage  Human readable error message
+   * @param {object} err           Detailed error information if available
+   */
+  onError: function (errorMessage, err) {
+    console.log(errorMessage, err);
+  },
+  /**
+   * When deletion attempt finishes, whether successful or not.
+   */
+  onComplete: function () {
+    console.log('Finished');
+  }
 });
 ```
 
