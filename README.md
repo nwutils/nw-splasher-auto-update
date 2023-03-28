@@ -14,7 +14,7 @@ In the `splash.html` file
 ```js
 /**
  * 1. Checks for updates
- * 2. Downloads zip and extracts it of new version if available
+ * 2. Downloads zip and extracts it if new version is available
  * 3. Launches a window pointed to the latest version
  */
 nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
