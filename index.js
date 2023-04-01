@@ -5,6 +5,8 @@
  * @author  TheJaredWilcurt
  */
 
+/* eslint-disable */
+
 const validation = require('./src/validation.js');
 
 const nwSplasherAutoUpdate = {
