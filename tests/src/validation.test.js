@@ -11,8 +11,10 @@ const validation = require('../../src/validation.js');
 describe('validation.js', () => {
   let customLogger;
   let options;
+  const consoleError = console.error;
 
   beforeEach(() => {
+    console.error = vi.fn();
     customLogger = vi.fn();
     options = {
       verbose: true,
@@ -20,14 +22,47 @@ describe('validation.js', () => {
     };
   });
 
+  afterEach(() => {
+    console.error = consoleError;
+  });
+
   describe('Specific', () => {
     describe('validateDownloadLatestAppAndOpenWindowInBackgroundOptions', () => {
-      test('undefined', () => {
+      test('undefined returns defaulted object with warnings', () => {
         expect(validation.validateDownloadLatestAppAndOpenWindowInBackgroundOptions())
-          .toEqual(undefined);
+          .toEqual({
+            verbose: true,
+            splasher: {
+              port: 4443,
+              closeSplashAfter: 3000
+            },
+            autoUpdate: {
+              downloadPath: helpers.requiredFunctionMissing,
+              confirmNewVersion: helpers.requiredFunctionMissing,
+              downloadRetries: 3,
+              extractRetries: 3
+            },
+            newWindow: {
+              entry: undefined,
+              window: undefined
+            }
+          });
 
-        expect(customLogger)
-          .not.toHaveBeenCalled();
+        expect(console.error.mock.calls)
+          .toEqual([
+            [
+              '_________________________\nNW-Splasher-Auto-Update:\n',
+              'The autoUpdate.versionUrl must be a string starting with http'
+            ],
+            [
+              '_________________________\nNW-Splasher-Auto-Update:\n',
+              'The autoUpdate.downloadPath is a required function'
+            ],
+            [
+              '_________________________\nNW-Splasher-Auto-Update:\n',
+              'The autoUpdate.confirmNewVersion is a required function'
+            ]
+          ]);
       });
     });
 
