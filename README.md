@@ -51,6 +51,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * then pass the response into the confirmNewVersion and downloadPath
      * callback functions you provide.
      */
+    // This is an example, you can put whatever URL you want here
     versionUrl: 'https://example.com/versions.json',
     /**
      * Check if the latest remote version is newer than the latest local version.
@@ -63,6 +64,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * @return {string}               The new version number (continue to download zip), or false (open current version)
      */
     confirmNewVersion: function (response, latestLocal) {
+      //This is just an example, you can put any logic you want here
       response = JSON.parse(response);
       const latestRemote = response.latest.version;
       const updateAvailable = require('semver').gt(latestRemote, latestLocal);
@@ -79,6 +81,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * @return {string}           A url to a ZIP file to be downloaded
      */
     downloadPath: function (response) {
+      //This is just an example, you can put any logic you want here
       response = JSON.parse(response);
       return response.latest.downloadUrl;
     },
@@ -93,6 +96,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * @param  {number} update.extractProgress   The extract progress percent
      */
     onUpdate: function ({ downloadProgress, extractProgress }) {
+      //This is just an example, you can put any logic you want here
       if (downloadProgress) {
         console.log('Download progress: ' + downloadProgress + '%');
       }
@@ -110,6 +114,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * @return {Boolean}            true = continue, false = retry/stop
      */
     validateZip: function (pathToZip) {
+      //This is just an example, you can put any logic you want here
       return true;
     },
     /**
@@ -122,6 +127,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * @return {Boolean}                true = continue, false = retry/stop
      */
     validateExtract: function (pathToExtract) {
+      //This is just an example, you can put any logic you want here
       return true;
     },
     /**
@@ -131,6 +137,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * @param {string} message  Human readable warning message
      */
     onRetry: function (message) {
+      //This is just an example, you can put any logic you want here
       console.log(message);
     },
     /**
@@ -142,6 +149,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * @param {object} err           Detailed error information if available
      */
     onError: function (errorMessage, err) {
+      //This is just an example, you can put any logic you want here
       console.log(errorMessage, err);
     },
     /**
