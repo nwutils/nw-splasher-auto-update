@@ -51,6 +51,9 @@ const validation = {
    * @return {object}          The user's options object (mutated)
    */
   validateSplasherOptions: function (options) {
+    if (!options) {
+      return undefined;
+    }
     options.splasher = this.defaultObject(options, options.splasher, 'splasher');
     options.splasher.port = this.defaultNumber(
       options,
@@ -73,6 +76,9 @@ const validation = {
    * @return {object}          The user's options object (mutated)
    */
   validateAutoUpdateOptions: function (options) {
+    if (!options) {
+      return undefined;
+    }
     options.autoUpdate = this.defaultObject(options, options.autoUpdate, 'autoUpdate');
     if (
       typeof(options.autoUpdate.versionUrl) !== 'string' ||
@@ -124,6 +130,9 @@ const validation = {
    * @return {object}          The user's options object (mutated)
    */
   validateNewWindowOptions: function (options) {
+    if (!options) {
+      return undefined;
+    }
     options.newWindow = this.defaultObject(options, options.newWindow, 'newWindow');
     options.newWindow.entry = this.validateOptionalString(
       options,
@@ -144,6 +153,9 @@ const validation = {
    * @return {object}          The user's options object (mutated)
    */
   removeUndocumentedDownloadLatestAppAndOpenWindowInBackgroundKeys: function (options) {
+    if (!options) {
+      return undefined;
+    }
     const documentedSplasherKeys = [
       'port',
       'closeSplashAfter'
