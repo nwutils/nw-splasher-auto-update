@@ -26,7 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    # mock-fs dropped support for Node 10
     - if: ${{ matrix.node-version == '18.x' }}
-      run: npm t
-      run: npm run lint
+      run:
+        - npm t
+        - npm run lint
