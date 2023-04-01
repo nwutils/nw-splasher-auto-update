@@ -5,11 +5,11 @@
  * @author  TheJaredWilcurt
  */
 
-const validation = require('./src/validation.js');
+const library = require('./index.js');
 
 const options = {
   autoUpdate: {
-    versionUrl: 'http://example.com/versions.json',
+    versionUrl: 'https://api.github.com/repos/scout-app/scout-app/releases',
     confirmNewVersion: function (response, latestLocal) {
       response = JSON.parse(response);
       const latestRemote = response.latest.version;
@@ -26,4 +26,4 @@ const options = {
   }
 };
 
-console.log(validation.validateDownloadLatestAppAndOpenWindowInBackgroundOptions(options));
+library.downloadLatestAppAndOpenWindowInBackground(options);
