@@ -4,8 +4,9 @@
  * @file Used for manually testing the code
  */
 
-const library = require('./index.js');
 const semver = require('semver');
+
+const library = require('./index.js');
 
 let options = {
   autoUpdate: {
@@ -83,14 +84,14 @@ options = {
     },
     /**
      * Called after hitting the versionUrl with the response.
-     * Must return a url to a ZIP file to be downloaded/extracted
+     * Must return a url to a ZIP file to be downloaded/extracted.
      *
      * @param  {string} response  The response body from the network request
      * @return {string}           A url to a ZIP file to be downloaded
      */
     downloadPath: function (response) {
       console.log('downloadPath');
-      //This is just an example, you can put any logic you want here
+      // This is just an example, you can put any logic you want here
       response = JSON.parse(response);
       return response.latest.downloadUrl;
     },
@@ -106,7 +107,7 @@ options = {
      */
     onUpdate: function ({ downloadProgress, extractProgress }) {
       console.log('onUpdate');
-      //This is just an example, you can put any logic you want here
+      // This is just an example, you can put any logic you want here
       if (downloadProgress) {
         console.log('Download progress: ' + downloadProgress + '%');
       }
@@ -121,11 +122,11 @@ options = {
      * nwSplasherAutoUpdate will retry or stop running.
      *
      * @param  {string}  pathToZip  File path to the downloaded zip file
-     * @return {Boolean}            true = continue, false = retry/stop
+     * @return {boolean}            true = continue, false = retry/stop
      */
     validateZip: function (pathToZip) {
-      console.log('validateZip');
-      //This is just an example, you can put any logic you want here
+      console.log('validateZip', pathToZip);
+      // This is just an example, you can put any logic you want here
       return true;
     },
     /**
@@ -135,11 +136,11 @@ options = {
      * then nwSplasherAutoUpdate will retry or stop running.
      *
      * @param  {string}  pathToExtract  File path to the downloaded zip file
-     * @return {Boolean}                true = continue, false = retry/stop
+     * @return {boolean}                true = continue, false = retry/stop
      */
     validateExtract: function (pathToExtract) {
-      console.log('validateExtract');
-      //This is just an example, you can put any logic you want here
+      console.log('validateExtract', pathToExtract);
+      // This is just an example, you can put any logic you want here
       return true;
     },
     /**
@@ -149,7 +150,7 @@ options = {
      * @param {string} message  Human readable warning message
      */
     onRetry: function (message) {
-      //This is just an example, you can put any logic you want here
+      // This is just an example, you can put any logic you want here
       console.log('onRetry', message);
     },
     /**
@@ -161,7 +162,7 @@ options = {
      * @param {object} error         Detailed error information if available
      */
     onError: function (errorMessage, error) {
-      //This is just an example, you can put any logic you want here
+      // This is just an example, you can put any logic you want here
       console.log('onError', errorMessage, error);
     },
     /**
