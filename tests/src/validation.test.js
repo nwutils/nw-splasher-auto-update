@@ -1,8 +1,7 @@
 'use strict';
 
 /**
- * @file   Tests the validation file's functions
- * @author TheJaredWilcurt
+ * @file Tests the validation file's functions
  */
 
 const helpers = require('../../src/helpers.js');

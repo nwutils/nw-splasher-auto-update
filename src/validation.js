@@ -1,8 +1,9 @@
 'use strict';
 
 /**
- * @file    This file validates the options object passed in by the user of this library to ensure it meets the expectations of the code.
- * @author  TheJaredWilcurt
+ * @file This file validates the options object passed in by the user of
+ *       this library to ensure it meets the expectations of the code.
+ *       It also provides default values for options where possible.
  */
 
 const {

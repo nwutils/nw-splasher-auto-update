@@ -1,8 +1,7 @@
 'use strict';
 
 /**
- * @file    Defines shared constant variables
- * @author  TheJaredWilcurt
+ * @file Defines shared constant variables
  */
 
 const DEFAULT_CLOSE_SPLASH_AFTER = 3000;

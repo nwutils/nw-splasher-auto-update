@@ -1,8 +1,7 @@
 'use strict';
 
 /**
- * @file    Vite config
- * @author  TheJaredWilcurt
+ * @file Configuration file for Vite to set up unit tests.
  */
 
 /* eslint-disable import/extensions,import/no-unresolved,import/no-anonymous-default-export,import/no-unused-modules */

@@ -1,8 +1,7 @@
 'use strict';
 
 /**
- * @file    Hits a provided endpoint and returns the data containing version info
- * @author  TheJaredWilcurt
+ * @file Hits a provided endpoint and returns the data containing version info
  */
 
 const { OPTIONS } = require('../api-type-definitions.js');

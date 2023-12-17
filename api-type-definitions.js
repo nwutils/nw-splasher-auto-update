@@ -1,6 +1,5 @@
 /**
- * @file    Type definitions for the API and reusable functions/objects
- * @author  TheJaredWilcurt
+ * @file Type definitions for the API and reusable functions/objects.
  */
 
 /**

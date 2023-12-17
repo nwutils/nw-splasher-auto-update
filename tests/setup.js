@@ -1,6 +1,5 @@
 'use strict';
 
 /**
- * @file    Vitest setup file
- * @author  TheJaredWilcurt
+ * @file Vitest setup file
  */
