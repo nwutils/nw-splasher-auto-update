@@ -190,12 +190,12 @@ const validation = {
    * Loops over an array of strings of key names, deletes
    * keys not found in the array from the object.
    *
-   * @param {object}   obj   Any object with keys
-   * @param {string[]} keys  Array of strings to be kept on the object
+   * @param {object}   obj         Any object with keys
+   * @param {string[]} keysToKeep  Array of strings to be kept on the object
    */
-  deleteKeys: function (obj, keys) {
+  deleteKeys: function (obj, keysToKeep) {
     for (const key of Object.keys(obj)) {
-      if (!keys.includes(key)) {
+      if (!keysToKeep.includes(key)) {
         delete obj[key];
       }
     }

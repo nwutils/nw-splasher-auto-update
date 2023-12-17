@@ -21,7 +21,7 @@ const nwSplasherAutoUpdate = {
   downloadLatestAppAndOpenWindowInBackground: async function (options) {
     options = validation.validateDownloadLatestAppAndOpenWindowInBackgroundOptions(options);
     const data = await getVersionUrl(options);
-    console.log(typeof data);
+    console.log({ data });
     // confirm version
     // get download path
     // download zip

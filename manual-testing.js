@@ -6,6 +6,7 @@
  */
 
 const library = require('./index.js');
+const semver = require('semver');
 
 const options = {
   autoUpdate: {
@@ -13,7 +14,7 @@ const options = {
     confirmNewVersion: function (response, latestLocal) {
       response = JSON.parse(response);
       const latestRemote = response.latest.version;
-      const updateAvailable = require('semver').gt(latestRemote, latestLocal);
+      const updateAvailable = semver.gt(latestRemote, latestLocal);
       if (updateAvailable) {
         return latestRemote;
       }

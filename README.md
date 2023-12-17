@@ -26,8 +26,8 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
    * Your own custom logging function called with helpful warning/error
    * messages from the internal validators. Only used if verbose: true.
    *
-   * @param  {string} message The human readable warning/error message
-   * @param  {object} error   Sometimes an error or options object is passed
+   * @param {string} message  The human readable warning/error message
+   * @param {object} error    Sometimes an error or options object is passed
    */
   customLogger: function (message, error) {
     console.log(message, error);
@@ -59,9 +59,9 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * download/extract. If no new version exists, then return false and the latest
      * local version will be opened in a new window and the splash screen closed.
      *
-     * @param  {string}  response     The network respone from versionUrl
-     * @param  {string}  latestLocal  The latest downloaded version, or undefined if not present
-     * @return {string}               The new version number (continue to download zip), or false (open current version)
+     * @param  {string} response     The network respone from versionUrl
+     * @param  {string} latestLocal  The latest downloaded version, or undefined if not present
+     * @return {string}              The new version number (continue to download zip), or false (open current version)
      */
     confirmNewVersion: function (response, latestLocal) {
       //This is just an example, you can put any logic you want here
@@ -91,9 +91,9 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
     /**
      * Called when an update occurs during download/extract.
      *
-     * @param  {object} update                   Object containing percents
-     * @param  {number} update.downloadProgress  The download progress percent
-     * @param  {number} update.extractProgress   The extract progress percent
+     * @param {object} update                   Object containing percents
+     * @param {number} update.downloadProgress  The download progress percent
+     * @param {number} update.extractProgress   The extract progress percent
      */
     onUpdate: function ({ downloadProgress, extractProgress }) {
       //This is just an example, you can put any logic you want here
@@ -146,11 +146,11 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * all retries were exhausted.
      *
      * @param {string} errorMessage  Human readable error message
-     * @param {object} err           Detailed error information if available
+     * @param {object} error         Detailed error information if available
      */
-    onError: function (errorMessage, err) {
+    onError: function (errorMessage, error) {
       //This is just an example, you can put any logic you want here
-      console.log(errorMessage, err);
+      console.log(errorMessage, error);
     },
     /**
      * Called just prior to opening the new window
