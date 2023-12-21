@@ -1,0 +1,17 @@
+{
+  "name": "nw-splasher-auto-update-manual-testing",
+  "main": "index.html",
+  "window": {
+    "width": 300,
+    "height": 150
+  },
+  "scripts": {
+    "start": "nw ."
+  },
+  "devDependencies": {
+    "nw": "0.82.0-sdk"
+  },
+  "volta": {
+    "node": "20.7.0"
+  }
+}

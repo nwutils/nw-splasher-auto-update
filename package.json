@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint --config=.eslintrc.js index.js src tests manual-testing.js",
     "fix": "eslint --fix --config=.eslintrc.js index.js src tests manual-testing.js",
-    "manual": "node manual-testing.js",
+    "manual": "cd nw-testing && npm start",
     "test": "vitest --coverage"
   },
   "dependencies": {
@@ -45,6 +45,6 @@
   },
   "homepage": "https://github.com/nwutils/nw-splasher-auto-update#readme",
   "volta": {
-    "node": "20.10.0"
+    "node": "20.7.0"
   }
 }
