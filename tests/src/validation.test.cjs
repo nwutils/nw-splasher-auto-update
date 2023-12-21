@@ -4,8 +4,8 @@
  * @file Tests the validation file's functions
  */
 
-const helpers = require('../../src/helpers.js');
-const validation = require('../../src/validation.js');
+const helpers = require('../../src/helpers.cjs');
+const validation = require('../../src/validation.cjs');
 
 describe('validation.js', () => {
   let customLogger;

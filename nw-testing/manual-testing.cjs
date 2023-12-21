@@ -6,7 +6,7 @@
 
 const semver = require('semver');
 
-const library = require('../index.js');
+const library = require('../index.cjs');
 
 /**
  * Manual testing.

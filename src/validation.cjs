@@ -11,8 +11,8 @@ const {
   DEFAULT_DOWNLOAD_RETRIES,
   DEFAULT_EXTRACT_RETRIES,
   DEFAULT_PORT_NUMBER
-} = require('./constants.js');
-const helpers = require('./helpers.js');
+} = require('./constants.cjs');
+const helpers = require('./helpers.cjs');
 
 const validation = {
   /**

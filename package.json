@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Tool to automate checking for updates and downloading newer versions for NW.js apps",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "lint": "eslint --config=.eslintrc.js index.js src tests nw-testing",
-    "fix": "eslint --fix --config=.eslintrc.js index.js src tests nw-testing",
+    "lint": "eslint --ext .js,.cjs --config=.eslintrc.cjs index.cjs src tests nw-testing",
+    "fix": "eslint --fix --ext .js,.cjs --config=.eslintrc.cjs index.cjs src tests nw-testing",
     "manual": "cd nw-testing && npm start",
     "test": "vitest --coverage"
   },

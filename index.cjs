@@ -7,11 +7,11 @@
 
 /* eslint-disable */
 
-const { OPTIONS } = require('./api-type-definitions.js');
+const { OPTIONS } = require('./api-type-definitions.cjs');
 
-const validation = require('./src/validation.js');
-const getVersionUrl = require('./src/getVersionUrl.js');
-const getLatestLocal = require('./src/getLatestLocal.js');
+const validation = require('./src/validation.cjs');
+const getVersionUrl = require('./src/getVersionUrl.cjs');
+const getLatestLocal = require('./src/getLatestLocal.cjs');
 
 function stub () {}
 
