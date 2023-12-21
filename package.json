@@ -4,8 +4,8 @@
   "description": "Tool to automate checking for updates and downloading newer versions for NW.js apps",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --config=.eslintrc.js index.js src tests manual-testing.js",
-    "fix": "eslint --fix --config=.eslintrc.js index.js src tests manual-testing.js",
+    "lint": "eslint --config=.eslintrc.js index.js src tests nw-testing",
+    "fix": "eslint --fix --config=.eslintrc.js index.js src tests nw-testing",
     "manual": "cd nw-testing && npm start",
     "test": "vitest --coverage"
   },

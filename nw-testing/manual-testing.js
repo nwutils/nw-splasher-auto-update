@@ -8,6 +8,9 @@ const semver = require('semver');
 
 const library = require('../index.js');
 
+/**
+ * Manual testing.
+ */
 function manualTesting () {
   let options = {
     autoUpdate: {

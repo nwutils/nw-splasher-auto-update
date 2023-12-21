@@ -8,6 +8,9 @@
   "scripts": {
     "start": "nw ."
   },
+  "dependencies": {
+    "semver": "^7.5.4"
+  },
   "devDependencies": {
     "nw": "0.82.0-sdk"
   },

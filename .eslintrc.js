@@ -18,6 +18,7 @@ module.exports = {
     jest: true
   },
   globals: {
+    nw: true,
     vi: true
   },
   extends: [
