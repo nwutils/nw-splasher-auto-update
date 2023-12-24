@@ -7,7 +7,7 @@
 const helpers = require('../../src/helpers.cjs');
 const validation = require('../../src/validation.cjs');
 
-describe('validation.js', () => {
+describe('validation.cjs', () => {
   let customLogger;
   let options;
   const consoleError = console.error;

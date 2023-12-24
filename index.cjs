@@ -21,7 +21,7 @@ const nwSplasherAutoUpdate = {
    * new version is available. Launches a window pointed
    * to the latest version.
    *
-   * @param  {OPTIONS} options  The user's options object
+   * @param {OPTIONS} options  The user's options object
    */
   downloadLatestAppAndOpenWindowInBackground: async function (options) {
     // Validate options
