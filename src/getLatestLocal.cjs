@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const { OPTIONS } = require('../api-type-definitions.cjs');
 
-const { STORAGE_LOCATION } = require('./constants.cjs');
+const { EXTRACTS_LOCATION } = require('./constants.cjs');
 const helpers = require('./helpers.cjs');
 
 /**
@@ -24,8 +24,8 @@ async function getLatestLocal (options) {
 
   let latestLocal = '0.0.0';
 
-  if (fs.existsSync(STORAGE_LOCATION)) {
-    console.log(fs.readdirSync(STORAGE_LOCATION));
+  if (fs.existsSync(EXTRACTS_LOCATION)) {
+    console.log(fs.readdirSync(EXTRACTS_LOCATION));
   }
 
   if (latestLocal) {

@@ -26,6 +26,13 @@
       Reload
     </button>
     <script>
+      nw.Window.get().moveTo(1587, 64);
+      chrome.developerPrivate.openDevTools({
+        renderViewId: -1,
+        renderProcessId: -1,
+        extensionId: chrome.runtime.id
+      });
+
       const { manualTesting } = require('./manual-testing.cjs');
 
       const runButton = document.getElementById('run');

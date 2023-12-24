@@ -12,6 +12,7 @@ const { OPTIONS } = require('./api-type-definitions.cjs');
 const validation = require('./src/validation.cjs');
 const getVersionUrl = require('./src/getVersionUrl.cjs');
 const getLatestLocal = require('./src/getLatestLocal.cjs');
+const downloadZip = require('./src/downloadZip.cjs');
 
 function stub () {}
 
@@ -39,10 +40,10 @@ const nwSplasherAutoUpdate = {
     console.log({ latestRemote, latestLocal });
 
     // get download path
-    stub();
+    const downloadPath = await options.autoUpdate.downloadPath(versionUrlResponse);
 
     // download zip
-    stub();
+    await downloadZip(options, downloadPath);
 
     // validate zip
     stub();
@@ -68,8 +69,10 @@ const nwSplasherAutoUpdate = {
       // Must match the port number used in the splash.html
       port: 4443
     };
+  },
+  deletePastVersions: function () {
+    console.log('This is a stub');
   }
 };
-
 
 module.exports = nwSplasherAutoUpdate;

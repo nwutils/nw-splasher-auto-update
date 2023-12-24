@@ -25,6 +25,7 @@ function manualTesting () {
         return false;
       },
       downloadPath: function (response) {
+        console.log(response);
         response = JSON.parse(response);
         return response.latest.downloadUrl;
       }
@@ -82,10 +83,7 @@ function manualTesting () {
        * @return {string}           A url to a ZIP file to be downloaded
        */
       downloadPath: function (response) {
-        console.log('downloadPath');
-        // This is just an example, you can put any logic you want here
-        response = JSON.parse(response);
-        return response.latest.downloadUrl;
+        return response.data[0].zipball_url;
       },
       // If the download or extract fails, we will retry n times before stopping
       downloadRetries: 3,
