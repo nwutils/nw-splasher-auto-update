@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Manual test</title>
+    <style>
+      body {
+        background: #333;
+        color: #CCC;
+        padding-top: 40px;
+        text-align: center;
+      }
+      button {
+        background: #888;
+        border: 0px;
+        margin-right: 10px;
+        color: #EEE;
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="run">
+      Run
+    </button>
+    <button id="reload">
+      Reload
+    </button>
+    <script>
+      nw.Window.get().moveTo(1587, 64);
+      chrome.developerPrivate.openDevTools({
+        renderViewId: -1,
+        renderProcessId: -1,
+        extensionId: chrome.runtime.id
+      });
+
+      const { manualTesting } = require('./manual-testing.cjs');
+
+      const runButton = document.getElementById('run');
+      const reloadButton = document.getElementById('reload');
+      
+      runButton.addEventListener('click', function () {
+        manualTesting();
+      });
+
+      reloadButton.addEventListener('click', function () {
+        nw.Window.get().reloadIgnoringCache();
+      });
+    </script>
+  </body>
+</html>

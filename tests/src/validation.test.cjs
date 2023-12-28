@@ -1,14 +1,13 @@
 'use strict';
 
 /**
- * @file   Tests the validation file's functions
- * @author TheJaredWilcurt
+ * @file Tests the validation file's functions
  */
 
-const helpers = require('../../src/helpers.js');
-const validation = require('../../src/validation.js');
+const helpers = require('../../src/helpers.cjs');
+const validation = require('../../src/validation.cjs');
 
-describe('validation.js', () => {
+describe('validation.cjs', () => {
   let customLogger;
   let options;
   const consoleError = console.error;

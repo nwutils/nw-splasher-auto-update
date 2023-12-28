@@ -1,8 +1,7 @@
 'use strict';
 
 /**
- * @file    ESLint setup
- * @author  TheJaredWilcurt
+ * @file ESLint setup
  */
 
 const path = require('path');
@@ -19,6 +18,7 @@ module.exports = {
     jest: true
   },
   globals: {
+    nw: true,
     vi: true
   },
   extends: [

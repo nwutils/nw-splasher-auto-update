@@ -1,17 +1,20 @@
 'use strict';
 
 /**
- * @file    This file validates the options object passed in by the user of this library to ensure it meets the expectations of the code.
- * @author  TheJaredWilcurt
+ * @file This file validates the options object passed in by the user of
+ *       this library to ensure it meets the expectations of the code.
+ *       It also provides default values for options where possible.
  */
+
+const { OPTIONS } = require('../api-type-definitions.cjs');
 
 const {
   DEFAULT_CLOSE_SPLASH_AFTER,
   DEFAULT_DOWNLOAD_RETRIES,
   DEFAULT_EXTRACT_RETRIES,
   DEFAULT_PORT_NUMBER
-} = require('./constants.js');
-const helpers = require('./helpers.js');
+} = require('./constants.cjs');
+const helpers = require('./helpers.cjs');
 
 const validation = {
   /**
@@ -21,8 +24,8 @@ const validation = {
    * @example
    * options = validateDownloadLatestAppAndOpenWindowInBackgroundOptions(options);
    *
-   * @param  {object} options  User's options
-   * @return {object}          Validated or mutated user options
+   * @param  {OPTIONS} options  User's options
+   * @return {object}           Validated or mutated user options
    */
   validateDownloadLatestAppAndOpenWindowInBackgroundOptions: function (options) {
     this.failed = false;
@@ -47,8 +50,8 @@ const validation = {
   /**
    * Validates the NW-Splasher settings passed into the downloadLatest... method.
    *
-   * @param  {object} options  The user's options object
-   * @return {object}          The user's options object (mutated)
+   * @param  {OPTIONS} options  The user's options object
+   * @return {object}           The user's options object (mutated)
    */
   validateSplasherOptions: function (options) {
     if (!options) {
@@ -72,8 +75,8 @@ const validation = {
   /**
    * Validates the Auto updater settings passed into the downloadLatest... method.
    *
-   * @param  {object} options  The user's options object
-   * @return {object}          The user's options object (mutated)
+   * @param  {OPTIONS} options  The user's options object
+   * @return {object}           The user's options object (mutated)
    */
   validateAutoUpdateOptions: function (options) {
     if (!options) {
@@ -126,8 +129,8 @@ const validation = {
   /**
    * Validates the New Window settings passed into downloadLatest... method.
    *
-   * @param  {object} options  The user's options object
-   * @return {object}          The user's options object (mutated)
+   * @param  {OPTIONS} options  The user's options object
+   * @return {object}           The user's options object (mutated)
    */
   validateNewWindowOptions: function (options) {
     if (!options) {
@@ -149,8 +152,8 @@ const validation = {
   /**
    * Removes any keys from the options object that are not in the documentation.
    *
-   * @param  {object} options  The user's options object
-   * @return {object}          The user's options object (mutated)
+   * @param  {OPTIONS} options  The user's options object
+   * @return {object}           The user's options object (mutated)
    */
   removeUndocumentedDownloadLatestAppAndOpenWindowInBackgroundKeys: function (options) {
     if (!options) {
@@ -190,12 +193,12 @@ const validation = {
    * Loops over an array of strings of key names, deletes
    * keys not found in the array from the object.
    *
-   * @param {object}   obj   Any object with keys
-   * @param {string[]} keys  Array of strings to be kept on the object
+   * @param {object}   obj         Any object with keys
+   * @param {string[]} keysToKeep  Array of strings to be kept on the object
    */
-  deleteKeys: function (obj, keys) {
+  deleteKeys: function (obj, keysToKeep) {
     for (const key of Object.keys(obj)) {
-      if (!keys.includes(key)) {
+      if (!keysToKeep.includes(key)) {
         delete obj[key];
       }
     }
@@ -203,10 +206,10 @@ const validation = {
   /**
    * Returns the original value if it is an object, or defaults to empty object.
    *
-   * @param  {object} options  The user's options object
-   * @param  {object} value    Any value
-   * @param  {string} key      Used in error message
-   * @return {object}          The original value if an object, or an empty object
+   * @param  {OPTIONS} options  The user's options object
+   * @param  {object}  value    Any value
+   * @param  {string}  key      Used in error message
+   * @return {object}           The original value if an object, or an empty object
    */
   defaultObject: function (options, value, key) {
     if (value === undefined) {
@@ -221,11 +224,11 @@ const validation = {
   /**
    * Validates a value is a number and if not returns a default.
    *
-   * @param  {object} options       The user's options object
-   * @param  {number} value         The number to validate
-   * @param  {number} defaultValue  The fallback number
-   * @param  {string} key           Used in error message
-   * @return {number}               The original number or the fallback
+   * @param  {OPTIONS} options       The user's options object
+   * @param  {number}  value         The number to validate
+   * @param  {number}  defaultValue  The fallback number
+   * @param  {string}  key           Used in error message
+   * @return {number}                The original number or the fallback
    */
   defaultNumber: function (options, value, defaultValue, key) {
     if (value === undefined) {
@@ -246,10 +249,10 @@ const validation = {
   /**
    * Validates optional strings.
    *
-   * @param  {object} options  Users options object
-   * @param  {object} value    String to validate
-   * @param  {string} key      Used by error message
-   * @return {object}          Original string or undefined
+   * @param  {OPTIONS} options  Users options object
+   * @param  {object}  value    String to validate
+   * @param  {string}  key      Used by error message
+   * @return {object}           Original string or undefined
    */
   validateOptionalString: function (options, value, key) {
     if (value === undefined) {
@@ -264,10 +267,10 @@ const validation = {
   /**
    * Validates optional objects.
    *
-   * @param  {object} options  Users options object
-   * @param  {object} value    Object to validate
-   * @param  {string} key      Used by error message
-   * @return {object}          Original object or undefined
+   * @param  {OPTIONS} options  Users options object
+   * @param  {object}  value    Object to validate
+   * @param  {string}  key      Used by error message
+   * @return {object}           Original object or undefined
    */
   validateOptionalObject: function (options, value, key) {
     if (value === undefined) {
@@ -282,10 +285,10 @@ const validation = {
   /**
    * Loops over list of optional functions and validates them.
    *
-   * @param  {object} options     User's options object
-   * @param  {string} apiSection  Name of the subKey on the options object where the optional functions live
-   * @param  {Array}  functions   Array of strings of function names
-   * @return {object}             User's options object (mutated)
+   * @param  {OPTIONS} options     User's options object
+   * @param  {string}  apiSection  Name of the subKey on the options object where the optional functions live
+   * @param  {Array}   functions   Array of strings of function names
+   * @return {object}              User's options object (mutated)
    */
   validateOptionalFunctions: function (options, apiSection, functions) {
     functions.forEach((func) => {
@@ -303,7 +306,7 @@ const validation = {
   /**
    * Verifies a value is a function or undefined.
    *
-   * @param  {object}   options  The user's options object
+   * @param  {OPTIONS}  options  The user's options object
    * @param  {Function} value    The function to validate
    * @param  {string}   key      Used in error message
    * @return {Function}          The original function or undefined
@@ -321,7 +324,7 @@ const validation = {
   /**
    * Verifies a required function is a function.
    *
-   * @param  {object}   options  User's options object
+   * @param  {OPTIONS}  options  User's options object
    * @param  {Function} value    The function to validate
    * @param  {string}   key      Used in error message
    * @return {Function}          The original value or undefined

@@ -25,8 +25,8 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
    * warning/error messages from the internal validators. Only used if
    * verbose: true. Defaults to console.error if not supplied.
    *
-   * @param string} message  The human readable warning/error message
-   * @param object} error    Sometimes an error or options object is passed
+   * @param {string} message  The human readable warning/error message
+   * @param {object} error    Sometimes an error or options object is passed
    */
   customLogger: function (message, error) {
     console.log(message, error);
@@ -78,7 +78,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
     },
     /**
      * Called after hitting the versionUrl with the response.
-     * Must return a url to a ZIP file to be downloaded/extracted
+     * Must return a url to a ZIP file to be downloaded/extracted.
      *
      * @param  {string} response  The response body from the network request
      * @return {string}           A url to a ZIP file to be downloaded
@@ -115,7 +115,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * nwSplasherAutoUpdate will retry the download or stop running.
      *
      * @param  {string}  pathToZip  File path to the downloaded zip file
-     * @return {Boolean}            true = continue, false = retry/stop
+     * @return {boolean}            true = continue, false = retry/stop
      */
     validateZip: function (pathToZip) {
       // This is just an example, you can put any logic you want here
@@ -128,7 +128,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * then nwSplasherAutoUpdate will retry extraction or stop running.
      *
      * @param  {string}  pathToExtract  File path to extracted folder
-     * @return {Boolean}                true = continue, false = retry/stop
+     * @return {boolean}                true = continue, false = retry/stop
      */
     validateExtract: function (pathToExtract) {
       // This is just an example, you can put any logic you want here
@@ -152,11 +152,11 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * all retries were exhausted.
      *
      * @param {string} errorMessage  Human readable error message
-     * @param {object} err           Detailed error information if available
+     * @param {object} error         Detailed error information if available
      */
-    onError: function (errorMessage, err) {
+    onError: function (errorMessage, error) {
       // This is just an example, you can put any logic you want here
-      console.log(errorMessage, err);
+      console.log(errorMessage, error);
     },
     /**
      * Optional event hook.
