@@ -4,9 +4,27 @@
  * @file File contains helper functions used by different files in the library.
  */
 
+const fs = require('fs');
+const path = require('path');
+
 const { OPTIONS } = require('../api-type-definitions.cjs');
 
-const { LIBRARY_LOG_PREFIX } = require('./constants.cjs');
+const {
+  EXTRACTS_LOCATION,
+  LIBRARY_LOG_PREFIX,
+  ZIPS_LOCATION
+} = require('./constants.cjs');
+
+/**
+ * If a folder path does not exist, creates it.
+ *
+ * @param {string} directory  Desired location of a folder
+ */
+function ensureExists (directory) {
+  if (!fs.existsSync(directory)) {
+    fs.mkdirSync(directory, { recursive: true });
+  }
+}
 
 const helpers = {
   /**
@@ -47,6 +65,28 @@ const helpers = {
    */
   requiredFunctionMissing: function () {
     throw 'ERROR: Required function missing.';
+  },
+  /**
+   * Generates the file path to the zip file based on the app version.
+   *
+   * @param  {string} version  The version number of the app
+   * @return {string}          The full file path to the zip
+   */
+  getZipFilePath: function (version) {
+    const directory = path.join(ZIPS_LOCATION, version);
+    ensureExists(directory);
+    return path.join(directory, 'app.zip');
+  },
+  /**
+   * Generates the file path to the extracted zip files folder.
+   *
+   * @param  {string} version  The version number of the app
+   * @return {string}          The full file path to the extract folder
+   */
+  getExtractPath: function (version) {
+    const directory = path.join(EXTRACTS_LOCATION, version);
+    ensureExists(directory);
+    return directory;
   }
 };
 
