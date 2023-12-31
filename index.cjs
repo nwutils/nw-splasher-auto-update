@@ -5,29 +5,33 @@
  *       accepts the input defined in the API documentation.
  */
 
-/* eslint-disable */
-
 const { OPTIONS } = require('./api-type-definitions.cjs');
 const downloadLatestAppAndOpenWindowInBackground = require('./src/downloadLatestAppAndOpenWindowInBackground/index.cjs');
 
-function stub () {}
-
 const nwSplasherAutoUpdate = {
-  /**
-   * Checks for updates. Downloads zip and extracts it if
-   * new version is available. Launches a window pointed
-   * to the latest version.
-   *
-   * @param {OPTIONS} options  The user's options object
-   */
   downloadLatestAppAndOpenWindowInBackground,
-  setCurrentWorkingDirectory: function () {},
+  /**
+   * Sets the current working directory (process.cwd) to the latest downloaded/extracted app version.
+   */
+  setCurrentWorkingDirectory: function () {
+    console.log('This is a stub');
+  },
+  /**
+   * Ran from the new app window. This will tell the splash window to close itself. Then displays the new window.
+   *
+   * @param {OPTIONS} options  Users options object.
+   */
   closeSplashAndShowApp: function (options) {
     options = {
       // Must match the port number used in the splash.html
       port: 4443
     };
+    console.log(options);
+    console.log('This is a stub');
   },
+  /**
+   * Deletes past downloaded app versions, leaving the latest in place.
+   */
   deletePastVersions: function () {
     console.log('This is a stub');
   }
