@@ -5,6 +5,7 @@
  */
 
 const { OPTIONS } = require('../../api-type-definitions.cjs');
+const helpers = require('../helpers.cjs');
 
 const downloadZip = require('./downloadZip.cjs');
 const getLatestLocal = require('./getLatestLocal.cjs');
@@ -47,13 +48,24 @@ async function downloadLatestAppAndOpenWindowInBackground (options) {
     return;
   }
 
-  console.log({ downloadPath, latestRemote });
-
   // download zip
   await downloadZip(options, downloadPath, latestRemote);
+  const zipFilePath = helpers.getZipFilePath(latestRemote);
 
   // validate zip
-  stub();
+  let zipIsValid = true;
+  if (options.autoUpdate.validateZip) {
+    try {
+      zipIsValid = await options.autoUpdate.validateZip(zipFilePath);
+    } catch (error) {
+      zipIsValid = false;
+      helpers.throwError(options, 'Issue found with your options.autoUpdate.validateZip function.', error);
+    }
+  }
+
+  if (!zipIsValid) {
+    return;
+  }
 
   // extract zip
   stub();
