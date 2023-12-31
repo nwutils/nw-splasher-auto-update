@@ -4,29 +4,16 @@
  * @file A stub test file to give coverage to the JSDocs types file.
  */
 
-const {
-  CUSTOMLOGGER,
-  OPTIONS,
-  SPLASHER,
-  AUTOUPDATE,
-  NEWWINDOW
-} = require('../api-type-definitions.cjs');
+const allTypeVariables = require('../api-type-definitions.cjs');
 
 describe('api-type-definitions.cjs', () => {
   test('Stub for coverage', () => {
-    expect(CUSTOMLOGGER)
-      .toEqual(undefined);
+    const allTypeValues = Object.values(allTypeVariables);
+    const allTypeVariablesAreUndefined = allTypeValues.every((value) => {
+      return value === undefined;
+    });
 
-    expect(OPTIONS)
-      .toEqual(undefined);
-
-    expect(SPLASHER)
-      .toEqual(undefined);
-
-    expect(AUTOUPDATE)
-      .toEqual(undefined);
-
-    expect(NEWWINDOW)
-      .toEqual(undefined);
+    expect(allTypeVariablesAreUndefined)
+      .toEqual(true);
   });
 });

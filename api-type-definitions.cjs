@@ -15,15 +15,6 @@
  */
 
 /**
- * @typedef  {object}       OPTIONS
- * @property {boolean}      [verbose=true]  Logs out helpful warnings/errors using `customLogger` or console.error.
- * @property {CUSTOMLOGGER} [customLogger]  Called (if verbose: true) with helpful warning/error messages from internal validators.
- * @property {SPLASHER}     [splasher]      Settings for the splash screen
- * @property {AUTOUPDATE}   [autoUpdate]    Settings for auto updating your app
- * @property {NEWWINDOW}    [newWindow]     Settings for the main app window displayed after auto-update completes
- */
-
-/**
  * @typedef  {object} SPLASHER
  * @property {number} [port=4443]              Websocket port the splash screen window listens on to know when to close itself.
  * @property {number} [closeSplashAfter=3000]  ms to wait before auto-closing splash. -1 to only close if signaled via the websocket port.
@@ -34,8 +25,8 @@
  * @property {string}   versionUrl           The url we hit to check for latest version.
  * @property {Function} confirmNewVersion    .
  * @property {Function} downloadPath         .
- * @property {number}   [downloadRetries=3]  .
- * @property {number}   [extractRetries=3]   .
+ * @property {number}   [downloadRetries=3]  The amount of attempts to perform if a download fails
+ * @property {number}   [extractRetries=3]   The amount of attempts to perform if unzipping fails
  * @property {Function} [onUpdate]           .
  * @property {Function} [validateZip]        .
  * @property {Function} [validateExtract]    .
@@ -52,14 +43,24 @@
  */
 
 /**
+ * @typedef  {object}       OPTIONS
+ * @property {boolean}      [verbose=true]  Logs out helpful warnings/errors using `customLogger` or console.error.
+ * @property {CUSTOMLOGGER} [customLogger]  Called (if verbose: true) with helpful warning/error messages from internal validators.
+ * @property {SPLASHER}     [splasher]      Settings for the splash screen
+ * @property {AUTOUPDATE}   [autoUpdate]    Settings for auto updating your app
+ * @property {NEWWINDOW}    [newWindow]     Settings for the main app window displayed after auto-update completes
+ */
+
+/**
+ * @typedef  {object} DOWNLOADPROGRESS
+ * @property {number} percent           Overall percent (between 0 to 1)
+ * @property {number} speed             The download speed in bytes/sec (ex: 554732)
+ */
+
+/**
  * @type {CUSTOMLOGGER}
  */
 let CUSTOMLOGGER;
-
-/**
- * @type {OPTIONS}
- */
-let OPTIONS;
 
 /**
  * @type {SPLASHER}
@@ -76,10 +77,21 @@ let AUTOUPDATE;
  */
 let NEWWINDOW;
 
+/**
+ * @type {OPTIONS}
+ */
+let OPTIONS;
+
+/**
+ * @type {DOWNLOADPROGRESS}
+ */
+let DOWNLOADPROGRESS;
+
 module.exports = {
-  CUSTOMLOGGER,
-  OPTIONS,
-  SPLASHER,
   AUTOUPDATE,
-  NEWWINDOW
+  CUSTOMLOGGER,
+  DOWNLOADPROGRESS,
+  NEWWINDOW,
+  OPTIONS,
+  SPLASHER
 };
