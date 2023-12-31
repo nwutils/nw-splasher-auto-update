@@ -96,7 +96,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * Called when an update occurs during download/extract. May be called many times.
      *
      * @param {object} update                   Object containing percents
-     * @param {object} update.downloadProgress  The download progress object provided by "request-progress"
+     * @param {object} update.downloadProgress  The download progress object
      * @param {number} update.extractProgress   The extract progress percent
      */
     onUpdate: function ({ downloadProgress, extractProgress }) {
