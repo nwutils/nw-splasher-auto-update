@@ -18,13 +18,12 @@ In the `splash.html` file
  * 3. Launches a window pointed to the latest version
  */
 nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
-  // OPTIONAL: defaults to true
+  // OPTIONAL: defaults to true, will not show console messages if false
   verbose: true,
   /**
-   * OPTIONAL: console.error is called by default if verbose: true.
-   *
-   * Your own custom logging function called with helpful warning/error
-   * messages from the internal validators. Only used if verbose: true.
+   * OPTIONAL: Your own custom logging function called with helpful
+   * warning/error messages from the internal validators. Only used if
+   * verbose: true. Defaults to console.error if not supplied.
    *
    * @param {string} message  The human readable warning/error message
    * @param {object} error    Sometimes an error or options object is passed
@@ -51,10 +50,14 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * then pass the response into the confirmNewVersion and downloadPath
      * callback functions you provide.
      */
-    // This is an example, you can put whatever URL you want here
+    // This is an example, you can put whatever URL you want here, does not need to be JSON.
     versionUrl: 'https://example.com/versions.json',
     /**
-     * Check if the latest remote version is newer than the latest local version.
+     * This function is handed the response from the versionUrl request, and the version number
+     * of the latest locally installed version of your app. You can then perform whatever logic
+     * you want (including additional network calls) to determine wether to download a new
+     * version of your app or to use the local copy.
+     *
      * If a new version is available, return the new version number to begin the
      * download/extract. If no new version exists, then return false and the latest
      * local version will be opened in a new window and the splash screen closed.
@@ -85,11 +88,12 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
       response = JSON.parse(response);
       return response.latest.downloadUrl;
     },
-    // If the download or extract fails, we will retry n times before stopping
+    // If the download or extract fails, we will retry the following amount of times before stopping
     downloadRetries: 3,
     extractRetries: 3,
     /**
-     * Called when an update occurs during download/extract.
+     * Optional event hook.
+     * Called when an update occurs during download/extract. May be called many times.
      *
      * @param {object} update                   Object containing percents
      * @param {object} update.downloadProgress  The download progress object provided by "request-progress"
@@ -108,8 +112,8 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
     /**
      * Optional function. You can run any code to validate
      * that the downloaded zip matches expecations.
-     * If it does return true. If you return false, then
-     * nwSplasherAutoUpdate will retry or stop running.
+     * If it does, return true. If you return false, then
+     * nwSplasherAutoUpdate will retry the download or stop running.
      *
      * @param  {string}  pathToZip  File path to the downloaded zip file
      * @return {boolean}            true = continue, false = retry/stop
@@ -121,10 +125,10 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
     /**
      * Optional function. You can run any code to validate
      * that the files extracted from the zip match your
-     * expecations. If they do return true. If you return false,
-     * then nwSplasherAutoUpdate will retry or stop running.
+     * expecations. If they do, return true. If you return false,
+     * then nwSplasherAutoUpdate will retry extraction or stop running.
      *
-     * @param  {string}  pathToExtract  File path to the downloaded zip file
+     * @param  {string}  pathToExtract  File path to extracted folder
      * @return {boolean}                true = continue, false = retry/stop
      */
     validateExtract: function (pathToExtract) {
@@ -132,6 +136,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
       return true;
     },
     /**
+     * Optional event hook.
      * When download or extract fails, but we haven't
      * exhausted all retries yet, this is called.
      *
@@ -142,6 +147,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
       console.log(message);
     },
     /**
+     * Optional event hook.
      * Called when an error is encountered that ended execution
      * prematurely. Such as failing to download or extract after
      * all retries were exhausted.
@@ -154,6 +160,7 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
       console.log(errorMessage, error);
     },
     /**
+     * Optional event hook.
      * Called just prior to opening the new window
      * and closing the splash screen.
      */
@@ -173,14 +180,17 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
 });
 ```
 
-In your main window that is displayed after the auto-update
+In your main window that is displayed after the auto-update (probably `index.html`);
 
-```js
+```html
+<script>
+const nwSplasherAutoUpdate = require('nw-splasher-auto-update');
 nwSplasherAutoUpdate.setCurrentWorkingDirectory();
 nwSplasherAutoUpdate.closeSplashAndShowApp({
   // Must match the port number used in the splash.html
   port: 4443
 });
+</script>
 ```
 
 
@@ -194,6 +204,7 @@ Deleting old cache
  */
 nwSplasherAutoUpdate.deletePastVersions({
   /**
+   * Optional event hook.
    * Called when any errors are encountered during deletion.
    *
    * @param {string} errorMessage  Human readable error message
@@ -203,6 +214,7 @@ nwSplasherAutoUpdate.deletePastVersions({
     console.log(errorMessage, err);
   },
   /**
+   * Optional event hook.
    * When deletion attempt finishes, whether successful or not.
    */
   onComplete: function () {
@@ -232,7 +244,7 @@ path.join(nw.App.dataPath, 'nwSplasherExtracts', version);
 * Would use `nw-splasher` as a dependency
 * Would use `fs-extra` to delete files
 * Not sure what to use for network requests (versions.json), downloading zip (including progress updates), or extracting the zip file (including progress updates)
-* We have a lot of beginner programmers. So although internally we may use async/await and promises, I'd like the API to be kept as a simple/approachable object with callbacks to be more approachable
+* We have a lot of beginner programmers. So although internally we may use async/await and promises, I'd like to keep the API as a simple object with callbacks to be more approachable
 * There are a lot of other features we might want to add in the future, like support for `.tar.gz`, `.rar`, `.7z`, etc but let's keep the scope small for now until those features are requested.
 
 
@@ -281,6 +293,14 @@ versionUrl: 'https://api.example.com/versions?nw=' + process.versions.nw
 If they release different auto-update packages for different NW.js versions.
 
 We suggest ALL users of this library code in some UI to convey to users when an auto-update won't work, and they'll need to download the full version from the website again. So if a user is on a 3 year old version of NW.js that you want to drop support for, there is some way of conveying that cleanly in the UI that is compatible with the older version.
+
+
+## How can I force the user to update to a newer NW.js version?
+
+Two ways:
+
+* **Thinking ahead:** Include some code in the splasher window to look at your end point response, notice a flag, and then display a message with a link "You must manually download and install the latest version", then the link opens in the user's default browser with `nw.Shell.openExternal('https://expample.com/download')`.
+* **Not thinking ahead:** If you didn't preemptively include a way of handling this case, you can instead have the latest version of the app just be a window that directs people to download a new version. The new version's splasher could then be better designed to handle this scenario.
 
 
 ### For-profit software
