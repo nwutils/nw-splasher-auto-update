@@ -37,9 +37,9 @@
 
 /**
  * @typedef  {object} NEWWINDOW
- * @property {string} [entry]   The file to load in the window, like 'index.html'.
- * @property {object} [window]  Any NW.js window subfield options.
- *                              [Docs](https://docs.nwjs.io/en/latest/References/Manifest%20Format/#window-subfields)
+ * @property {string} [entry]    The file to load in the window, like 'index.html'.
+ * @property {object} [window]   Any NW.js window subfield options.
+ *                               [Docs](https://docs.nwjs.io/en/latest/References/Manifest%20Format/#window-subfields)
  */
 
 /**
@@ -52,9 +52,16 @@
  */
 
 /**
- * @typedef  {object} DOWNLOADPROGRESS
- * @property {number} percent           Overall percent (between 0 to 1)
- * @property {number} speed             The download speed in bytes/sec (ex: 554732)
+ * @typedef  {object} DOWNLOADPROGRESSTOTAL
+ * @property {number} bytes                  The total number of bytes downloaded so far
+ * @property {number} percent                Overall percent (0-100), if server returned the total filesize, otherwise stays 0
+ * @property {number} speed                  The download speed in bytes/sec (ex: 554732)
+ */
+
+/**
+ * @typedef  {object}                DOWNLOADPROGRESS
+ * @property {array}                 details           An array of details
+ * @property {DOWNLOADPROGRESSTOTAL} total             The total download bytes, current speed, and percent
  */
 
 /**

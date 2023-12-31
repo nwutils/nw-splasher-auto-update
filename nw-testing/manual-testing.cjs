@@ -92,7 +92,7 @@ function manualTesting () {
        * Called when an update occurs during download/extract.
        *
        * @param {object} update                   Object containing percents
-       * @param {number} update.downloadProgress  The download progress percent
+       * @param {object} update.downloadProgress  The download progress percent
        * @param {number} update.extractProgress   The extract progress percent
        */
       onUpdate: function ({ downloadProgress, extractProgress }) {
@@ -102,7 +102,7 @@ function manualTesting () {
           console.log('Download progress:', downloadProgress);
         }
         if (extractProgress) {
-          console.log('Unzipping: ' + downloadProgress + '%');
+          console.log('Unzipping: ' + extractProgress + '%');
         }
       },
       /**

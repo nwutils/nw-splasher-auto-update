@@ -26,7 +26,12 @@ async function downloadZip (options, downloadUrl, latestRemote) {
   const downloadOptions = {
     existBehavior: 'overwrite',
     maxRetry: options.autoUpdate.downloadRetries,
-    reportInterval: 1250
+    reportInterval: 1250,
+    httpOptions: {
+      headers: {
+        'User-Agent': 'nw-splasher-auto-update'
+      }
+    }
   };
 
   return new EasyDl(downloadUrl, zipFilePath, downloadOptions)
@@ -35,18 +40,18 @@ async function downloadZip (options, downloadUrl, latestRemote) {
       /**
        * Callback for when progress events occur while downloading zip file.
        *
-       * @param {DOWNLOADPROGRESS} downloadProgress  Details about the progress of the download
+       * @param {DOWNLOADPROGRESS} progress  Details about the progress of the download
        */
-      function (downloadProgress) {
-        options.autoUpdate.onUpdate({ downloadProgress });
+      function (progress) {
+        options.autoUpdate.onUpdate({ downloadProgress: progress.total });
       }
     )
     .wait()
     .then((completed) => {
-      console.log('Downloaded?', completed);
+      console.log({ completed });
     })
     .catch((error) => {
-      console.log('[error]', error);
+      console.log({ error });
     });
 };
 
