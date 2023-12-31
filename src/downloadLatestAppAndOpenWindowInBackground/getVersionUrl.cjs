@@ -4,9 +4,8 @@
  * @file Hits a provided endpoint and returns the data containing version info
  */
 
-const { OPTIONS } = require('../api-type-definitions.cjs');
-
-const helpers = require('./helpers.cjs');
+const { OPTIONS } = require('../../api-type-definitions.cjs');
+const helpers = require('../helpers.cjs');
 
 /**
  * Uses the provided `versionUrl` to make a network request.

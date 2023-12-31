@@ -6,10 +6,9 @@
 
 const fs = require('fs');
 
-const { OPTIONS } = require('../api-type-definitions.cjs');
-
-const { EXTRACTS_LOCATION } = require('./constants.cjs');
-const helpers = require('./helpers.cjs');
+const { OPTIONS } = require('../../api-type-definitions.cjs');
+const { EXTRACTS_LOCATION } = require('../constants.cjs');
+const helpers = require('../helpers.cjs');
 
 /**
  * Checks the previously downloaded app versions to find

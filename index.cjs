@@ -8,11 +8,7 @@
 /* eslint-disable */
 
 const { OPTIONS } = require('./api-type-definitions.cjs');
-
-const validation = require('./src/validation.cjs');
-const getVersionUrl = require('./src/getVersionUrl.cjs');
-const getLatestLocal = require('./src/getLatestLocal.cjs');
-const downloadZip = require('./src/downloadZip.cjs');
+const downloadLatestAppAndOpenWindowInBackground = require('./src/downloadLatestAppAndOpenWindowInBackground/index.cjs');
 
 function stub () {}
 
@@ -24,53 +20,7 @@ const nwSplasherAutoUpdate = {
    *
    * @param {OPTIONS} options  The user's options object
    */
-  downloadLatestAppAndOpenWindowInBackground: async function (options) {
-    // Validate options
-    options = validation.validateDownloadLatestAppAndOpenWindowInBackgroundOptions(options);
-
-    // Get remote version data
-    const versionUrlResponse = await getVersionUrl(options);
-
-    // Get latest local
-    const latestLocal = await getLatestLocal(options);
-
-    // confirm version
-    const latestRemote = await options.autoUpdate.confirmNewVersion(versionUrlResponse, latestLocal);
-
-    if (!latestRemote) {
-      return;
-    }
-
-    // get download path
-    const downloadPath = await options.autoUpdate.downloadPath(versionUrlResponse);
-
-    if (!downloadPath) {
-      return;
-    }
-
-    console.log({ downloadPath, latestRemote });
-
-    // download zip
-    await downloadZip(options, downloadPath, latestRemote);
-
-    // validate zip
-    stub();
-
-    // extract zip
-    stub();
-
-    // validate extraction
-    stub();
-
-    // Update/Retry/Error/Complete
-    stub();
-
-    // close splash
-    stub();
-
-    // open app window
-    stub();
-  },
+  downloadLatestAppAndOpenWindowInBackground,
   setCurrentWorkingDirectory: function () {},
   closeSplashAndShowApp: function (options) {
     options = {

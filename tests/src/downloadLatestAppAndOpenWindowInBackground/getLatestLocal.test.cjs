@@ -4,7 +4,7 @@
  * @file Unit tests for checking the most recent local version of the app.
  */
 
-const getLatestLocal = require('../../src/getLatestLocal.cjs');
+const getLatestLocal = require('../../../src/downloadLatestAppAndOpenWindowInBackground/getLatestLocal.cjs');
 
 describe('getLatestLocal.cjs', () => {
   let options;

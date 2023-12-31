@@ -9,9 +9,8 @@ const EasyDl = require('easydl');
 const {
   DOWNLOADPROGRESS,
   OPTIONS
-} = require('../api-type-definitions.cjs');
-
-const helpers = require('./helpers.cjs');
+} = require('../../api-type-definitions.cjs');
+const helpers = require('../helpers.cjs');
 
 /**
  * Downloads the zip file to the download location.

@@ -6,15 +6,14 @@
  *       It also provides default values for options where possible.
  */
 
-const { OPTIONS } = require('../api-type-definitions.cjs');
-
+const { OPTIONS } = require('../../api-type-definitions.cjs');
 const {
   DEFAULT_CLOSE_SPLASH_AFTER,
   DEFAULT_DOWNLOAD_RETRIES,
   DEFAULT_EXTRACT_RETRIES,
   DEFAULT_PORT_NUMBER
-} = require('./constants.cjs');
-const helpers = require('./helpers.cjs');
+} = require('../constants.cjs');
+const helpers = require('../helpers.cjs');
 
 const validation = {
   /**
