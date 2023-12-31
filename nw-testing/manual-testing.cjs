@@ -4,6 +4,8 @@
  * @file Used for manually testing the code
  */
 
+const fs = require('fs');
+
 const semver = require('semver');
 
 const library = require('../index.cjs');
@@ -115,7 +117,7 @@ function manualTesting () {
        * @return {boolean}            true = continue, false = retry/stop
        */
       validateZip: function (pathToZip) {
-        console.log('validateZip', pathToZip);
+        console.log('Validate zip exists', pathToZip, fs.existsSync(pathToZip));
         // This is just an example, you can put any logic you want here
         return true;
       },
