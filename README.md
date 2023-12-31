@@ -96,16 +96,17 @@ nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
      * Called when an update occurs during download/extract. May be called many times.
      *
      * @param {object} update                   Object containing percents
-     * @param {number} update.downloadProgress  The download progress percent
+     * @param {object} update.downloadProgress  The download progress object
      * @param {number} update.extractProgress   The extract progress percent
      */
     onUpdate: function ({ downloadProgress, extractProgress }) {
       // This is just an example, you can put any logic you want here
       if (downloadProgress) {
-        console.log('Download progress: ' + downloadProgress + '%');
+        // for details on this object, see: https://github.com/IndigoUnited/node-request-progress
+        console.log('Download progress: ' + downloadProgress.percent + '%');
       }
       if (extractProgress) {
-        console.log('Unzipping: ' + downloadProgress + '%');
+        console.log('Unzipping: ' + extractProgress + '%');
       }
     },
     /**
@@ -253,12 +254,18 @@ path.join(nw.App.dataPath, 'nwSplasherExtracts', version);
 // Main splash screen needs versionUrl, download start confirmation, and a download path supplied
 nwSplasherAutoUpdate.downloadLatestAppAndOpenWindowInBackground({
   autoUpdate: {
+    // We'll go to this URL on your behalf and hand you the response in the below functions
     versionUrl: 'https://example.com/versions.json',
     confirmNewVersion: function (response, latestLocal) {
-      return true || false;
+      // You write your own logic to determine the latest version number and return it.
+      // Or return false if we do not need to download a new version.
+      // The latestLocal variable is the version number the user already has installed locally.
+      return '1.4.3';
     },
     downloadPath: function (response) {
-      return 'url to download zip file containing new app version'
+      // You write your own logic to determine the URL of the zip file containing the files
+      // from the latest version or your app.
+      return 'https://example.com/1.4.3/update.zip';
     }
   }
 });
@@ -298,4 +305,4 @@ Two ways:
 
 ### For-profit software
 
-If you are using NW.js to create for-profit software, then this style of auto-update may not work for you. If you require authenticating a license, key, or the user, or the download requires authentication, then this "splash + download a zip" approach is likely too simple for your needs, and you should consider writing your own solution custom to your use case.
+If you are using NW.js to create for-profit software, then this style of auto-update may not work for you. If you require authenticating a license, key, or the user, or the download requires authentication, then this "splash + download a zip" approach is likely too simple for your needs, and you should consider writing your own solution custom to your use case. Feel free to fork this repo if you want to use it as a base for your custom solution.
