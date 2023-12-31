@@ -37,13 +37,21 @@ const nwSplasherAutoUpdate = {
     // confirm version
     const latestRemote = await options.autoUpdate.confirmNewVersion(versionUrlResponse, latestLocal);
 
-    console.log({ latestRemote, latestLocal });
+    if (!latestRemote) {
+      return;
+    }
 
     // get download path
     const downloadPath = await options.autoUpdate.downloadPath(versionUrlResponse);
 
+    if (!downloadPath) {
+      return;
+    }
+
+    console.log({ downloadPath, latestRemote });
+
     // download zip
-    await downloadZip(options, downloadPath);
+    await downloadZip(options, downloadPath, latestRemote);
 
     // validate zip
     stub();

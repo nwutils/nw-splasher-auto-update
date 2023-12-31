@@ -99,7 +99,7 @@ function manualTesting () {
         console.log('onUpdate');
         // This is just an example, you can put any logic you want here
         if (downloadProgress) {
-          console.log('Download progress: ' + downloadProgress + '%');
+          console.log('Download progress:', downloadProgress);
         }
         if (extractProgress) {
           console.log('Unzipping: ' + downloadProgress + '%');
