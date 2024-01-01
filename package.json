@@ -11,6 +11,7 @@
     "test": "vitest --coverage"
   },
   "dependencies": {
+    "7zip-min": "^1.4.4",
     "axios": "^1.6.2",
     "easydl": "^1.1.1",
     "nw-splasher": "^1.0.0",

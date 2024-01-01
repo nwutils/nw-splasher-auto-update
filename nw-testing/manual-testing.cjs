@@ -117,9 +117,10 @@ function manualTesting () {
        * @return {boolean}            true = continue, false = retry/stop
        */
       validateZip: function (pathToZip) {
-        console.log('Validate zip exists', pathToZip, fs.existsSync(pathToZip));
+        const exists = fs.existsSync(pathToZip);
+        console.log('Validate zip exists', pathToZip, exists);
         // This is just an example, you can put any logic you want here
-        return true;
+        return exists;
       },
       /**
        * Optional function. You can run any code to validate

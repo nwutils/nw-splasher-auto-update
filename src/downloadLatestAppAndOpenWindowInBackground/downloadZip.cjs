@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @file Checks the most recent local version of the app
+ * @file Attempt to download the zip file.
  */
 
 const EasyDl = require('easydl');
