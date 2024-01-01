@@ -132,9 +132,10 @@ function manualTesting () {
        * @return {boolean}                true = continue, false = retry/stop
        */
       validateExtract: function (pathToExtract) {
-        console.log('validateExtract', pathToExtract);
+        const exists = fs.existsSync(pathToExtract);
+        console.log('Validate extract exists', pathToExtract, exists);
         // This is just an example, you can put any logic you want here
-        return true;
+        return exists;
       },
       /**
        * When download or extract fails, but we haven't

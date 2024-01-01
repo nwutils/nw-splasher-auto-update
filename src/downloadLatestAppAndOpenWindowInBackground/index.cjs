@@ -63,16 +63,29 @@ async function downloadLatestAppAndOpenWindowInBackground (options) {
       helpers.throwError(options, 'Issue found with your options.autoUpdate.validateZip function.', error);
     }
   }
-
   if (!zipIsValid) {
     return;
   }
 
   // extract zip
-  await extractZip(latestRemote);
+  const extractedSuccessfully = await extractZip(options, latestRemote);
+
+  console.log({ extractedSuccessfully });
 
   // validate extraction
-  stub();
+  let extractIsValid = true;
+  if (options.autoUpdate.validateExtract) {
+    try {
+      const extractFilePath = helpers.getExtractPath(latestRemote);
+      extractIsValid = await options.autoUpdate.validateExtract(extractFilePath);
+    } catch (error) {
+      extractIsValid = false;
+      helpers.throwError(options, 'Issue found with your options.autoUpdate.validateExtract function.', error);
+    }
+  }
+  if (!extractIsValid) {
+    return;
+  }
 
   // Update/Retry/Error/Complete
   stub();
