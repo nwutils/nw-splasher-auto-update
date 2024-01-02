@@ -9,7 +9,6 @@ const fs = require('fs');
 const semver = require('semver');
 
 const { OPTIONS } = require('../../api-type-definitions.cjs');
-const { EXTRACTS_LOCATION } = require('../constants.cjs');
 const helpers = require('../helpers.cjs');
 
 /**
@@ -24,10 +23,11 @@ async function getLatestLocal (options) {
   let latestLocal;
   let error;
   const errorMessage = 'Error getting latest local version number';
+  const extractsLocation = helpers.getExtractsLocation();
 
   try {
-    if (fs.existsSync(EXTRACTS_LOCATION)) {
-      const folders = fs.readdirSync(EXTRACTS_LOCATION);
+    if (fs.existsSync(extractsLocation)) {
+      const folders = fs.readdirSync(extractsLocation);
       latestLocal = semver.maxSatisfying(folders, '>=0');
     }
   } catch (err) {

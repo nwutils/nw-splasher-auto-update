@@ -4,6 +4,8 @@
  * @file Unit tests for checking the most recent local version of the app.
  */
 
+const path = require('path');
+
 const getLatestLocal = require('../../../src/downloadLatestAppAndOpenWindowInBackground/getLatestLocal.cjs');
 
 describe('getLatestLocal.cjs', () => {
@@ -20,10 +22,19 @@ describe('getLatestLocal.cjs', () => {
     vi.clearAllMocks();
   });
 
-  test('Stub for coverage', async () => {
+  test('Return false when there are no local folders', async () => {
     const result = await getLatestLocal(options);
 
     expect(result)
-      .toEqual('0.0.0');
+      .toEqual(false);
+  });
+
+  test('Return latest local version', async () => {
+    global.nw.App.dataPath = path.join(__dirname, '..', '..', 'mockData');
+
+    const result = await getLatestLocal(options);
+
+    expect(result)
+      .toEqual('2.10.1');
   });
 });

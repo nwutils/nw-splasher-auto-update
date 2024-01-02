@@ -9,11 +9,7 @@ const path = require('path');
 
 const { OPTIONS } = require('../api-type-definitions.cjs');
 
-const {
-  EXTRACTS_LOCATION,
-  LIBRARY_LOG_PREFIX,
-  ZIPS_LOCATION
-} = require('./constants.cjs');
+const { LIBRARY_LOG_PREFIX } = require('./constants.cjs');
 
 /**
  * If a folder path does not exist, creates it.
@@ -67,13 +63,30 @@ const helpers = {
     throw 'ERROR: Required function missing.';
   },
   /**
+   * Generate the path to the zips folder.
+   *
+   * @return {string} Path the zips folder
+   */
+  getZipsLocation: function () {
+    return path.join(nw.App.dataPath, 'nwSplasherZips');
+  },
+  /**
+   * Generate the path the extracts folder.
+   *
+   * @return {string} Path to the extracts folder
+   */
+  getExtractsLocation: function () {
+    return path.join(nw.App.dataPath, 'nwSplasherExtracts');
+  },
+  /**
    * Generates the file path to the zip file based on the app version.
    *
    * @param  {string} version  The version number of the app
    * @return {string}          The full file path to the zip
    */
   getZipFilePath: function (version) {
-    const directory = path.join(ZIPS_LOCATION, version);
+    const zipsLocation = this.getZipsLocation();
+    const directory = path.join(zipsLocation, version);
     ensureExists(directory);
     return path.join(directory, 'app.zip');
   },
@@ -84,7 +97,8 @@ const helpers = {
    * @return {string}          The full file path to the extract folder
    */
   getExtractPath: function (version) {
-    const directory = path.join(EXTRACTS_LOCATION, version);
+    const extractsLocation = this.getExtractsLocation();
+    const directory = path.join(extractsLocation, version);
     ensureExists(directory);
     return directory;
   }
