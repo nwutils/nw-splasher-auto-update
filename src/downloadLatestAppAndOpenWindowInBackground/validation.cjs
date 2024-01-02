@@ -6,6 +6,8 @@
  *       It also provides default values for options where possible.
  */
 
+const semver = require('semver');
+
 const { OPTIONS } = require('../../api-type-definitions.cjs');
 const {
   DEFAULT_CLOSE_SPLASH_AFTER,
@@ -185,6 +187,31 @@ const validation = {
     this.deleteKeys(options.newWindow, documentedNewWindowKeys);
 
     return options;
+  },
+  /**
+   * Validates the latestRemote string is a valid semver value.
+   *
+   * @param  {OPTIONS} options       The user's options object
+   * @param  {string}  latestRemote  The semver string for the latest remote version of the app
+   * @return {string}                The latestRemote string, or false if string is invalid
+   */
+  validateLatestRemote: function (options, latestRemote) {
+    if (!latestRemote) {
+      return false;
+    }
+    const isValid = !!semver.valid(latestRemote);
+    if (!isValid) {
+      const message = [
+        'The latest remote version',
+        '(' + String(latestRemote) + ')',
+        'must be a valid semver string',
+        '(Ex: \'1.0.0\').',
+        'See https://semver.org for details.'
+      ].join(' ');
+      helpers.throwError(options, message);
+      return false;
+    }
+    return latestRemote;
   },
 
   // Generic

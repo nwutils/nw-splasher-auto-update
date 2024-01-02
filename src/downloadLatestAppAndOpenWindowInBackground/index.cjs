@@ -36,9 +36,11 @@ async function downloadLatestAppAndOpenWindowInBackground (options) {
   const latestLocal = await getLatestLocal(options);
 
   // confirm version
-  const latestRemote = await options.autoUpdate.confirmNewVersion(versionUrlResponse, latestLocal);
+  let latestRemote = await options.autoUpdate.confirmNewVersion(versionUrlResponse, latestLocal);
+  latestRemote = validation.validateLatestRemote(options, latestRemote);
 
-  if (!latestRemote || !['number', 'string'].includes(typeof(latestRemote))) {
+  if (!latestRemote) {
+    console.log('done');
     return;
   }
 

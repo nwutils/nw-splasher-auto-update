@@ -6,6 +6,8 @@
 
 const fs = require('fs');
 
+const semver = require('semver');
+
 const { OPTIONS } = require('../../api-type-definitions.cjs');
 const { EXTRACTS_LOCATION } = require('../constants.cjs');
 const helpers = require('../helpers.cjs');
@@ -19,19 +21,27 @@ const helpers = require('../helpers.cjs');
  * @return {string}           The most recent local version number, or false
  */
 async function getLatestLocal (options) {
-  console.log('The getLatestLocal function is a stub and needs implemented');
+  let latestLocal;
+  let error;
+  const errorMessage = 'Error getting latest local version number';
 
-  let latestLocal = '0.0.0';
+  try {
+    if (fs.existsSync(EXTRACTS_LOCATION)) {
+      const folders = fs.readdirSync(EXTRACTS_LOCATION);
+      latestLocal = semver.maxSatisfying(folders, '>=0');
+    }
+  } catch (err) {
+    error = err;
+  }
 
-  if (fs.existsSync(EXTRACTS_LOCATION)) {
-    console.log(fs.readdirSync(EXTRACTS_LOCATION));
+  if (error) {
+    helpers.throwError(options, errorMessage, error);
   }
 
   if (latestLocal) {
     return latestLocal;
-  } else {
-    let error;
-    helpers.throwError(options, 'Error getting latest local version number', error);
+  } else if (!error) {
+    helpers.throwError(options, errorMessage);
   }
   return false;
 };
